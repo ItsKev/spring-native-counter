@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-native-counter-backend
+  labels:
+    app: spring-native-counter-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-native-counter-backend
+  template:
+    metadata:
+      annotations:
+        linkerd.io/inject: enabled
+      labels:
+        app: spring-native-counter-backend
+    spec:
+      containers:
+      - name: spring-native-counter-backend
+        image: spring-native-counter-backend:0.0.1-SNAPSHOT
+        ports:
+        - containerPort: 8080

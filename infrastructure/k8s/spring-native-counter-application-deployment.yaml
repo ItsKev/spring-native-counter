@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-native-counter-application
+  labels:
+    app: spring-native-counter-application
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-native-counter-application
+  template:
+    metadata:
+      annotations:
+        linkerd.io/inject: enabled
+      labels:
+        app: spring-native-counter-application
+    spec:
+      containers:
+      - name: spring-native-counter-application
+        image: spring-native-counter-application:0.0.1-SNAPSHOT
